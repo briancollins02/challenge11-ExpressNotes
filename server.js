@@ -4,8 +4,9 @@ const fs = require('fs');
 const util = require('util');
 // Helper Methodnfor creating unique ids
 const uuid = require('./helpers/uuid');
+let { notesArray } = require('./db/db.json');
 
-const PORT = 3001;
+const PORT = 4001;
 
 const app = express();
 
@@ -49,9 +50,8 @@ const readAndAppend = (content, file) => {
 };
 
 // Post Route
-// recreate this post route. it is currently code taken from Act 21
-app.post('/api/add-note', (req, res) => {
-  console.info(`${req.method} request received to add a tip`);
+app.post('/api/notes', (req, res) => {
+  console.info(`${req.method} request received to add a note`);
 
   const { title, text } = req.body;
 
@@ -59,7 +59,7 @@ app.post('/api/add-note', (req, res) => {
     const newNote = {
       title,
       text,
-      note_id: uuid(),
+      id: uuid(),
     };
 
     readAndAppend(newNote, './db/db.json');
@@ -67,6 +67,21 @@ app.post('/api/add-note', (req, res) => {
   } else {
     res.error('Error in adding tip');
   }
+});
+
+// Delete Route
+app.delete('/api/notes/:id', async (req, res) => {
+  console.info(`${req.method} request received to delete a note`);
+
+  const id = req.params.id;
+  readFromFile('./db/db.json')
+  .then((data) => JSON.parse(data))
+  .then((json) => {
+    const result = json.filter((notes) => notes.id !== id);
+
+    writeToFile('./db/db.json', result);
+    res.json(`Item ${id} has been deleted`);
+  });
 });
 
 app.listen(PORT, () =>

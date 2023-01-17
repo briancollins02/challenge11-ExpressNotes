@@ -1,27 +1,22 @@
 [
     {
-        "title": "Grocery List",
-        "text": "Bread, Eggs, Milk, Cereal, Pasta, Chicken",
-        "note_id": "37t8"
-    },
-    {
         "title": "Penguin",
         "text": "Chicken Run but with penguins?",
-        "note_id": "701e"
+        "id": "701e"
     },
     {
         "title": "IMPORTANT!!",
         "text": "Make dentist appointment before next week",
-        "note_id": "0a46"
+        "id": "0a46"
     },
     {
         "title": "Friendly Reminder",
         "text": "Don't forget to plan some fun into your day :)",
-        "note_id": "4e8g"
+        "id": "4e8g"
     },
     {
         "title": "Test Note",
         "text": "This is a test. Did it work?",
-        "note_id": "b857"
+        "id": "b857"
     }
 ]
